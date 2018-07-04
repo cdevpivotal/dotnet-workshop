@@ -9,7 +9,7 @@ will use this file to tell the Config Server where to get its
 configurations from.</p>
 <pre><code class="language-json">{
   &quot;git&quot;: {
-    &quot;uri&quot;: &quot;https://github.com/cdevpivotal/dotnet-workshop/tree/master/cloud-native-net-configs&quot;
+    &quot;uri&quot;: &quot;"uri": &quot;https://github.com/cdevpivotal/sc-workshop&quot;, &quot;label&quot;: &quot;config&quot;
   }
 }
 </code></pre>
