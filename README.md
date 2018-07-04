@@ -5,4 +5,12 @@ In this one-day workshop, learn  how to create cloud-native applications with .N
 
 By the end of the day, you’ll get exposed to what you need for refactoring existing .NET apps, and building entirely new ones in a cloud-native way.
 
+* [Introduction](introduction.md)
 
+* [Working with a Configuration Store](WorkingWithAConfigurationStore.md)
+
+* [Using a Service Registry](UsingAServiceRegistry.md)
+
+* [Flexing and Breaking Things](FlexingAndBreakingThings.md)
+
+* [Reading Material](ReadingMaterial.md)
