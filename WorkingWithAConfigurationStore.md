@@ -105,7 +105,7 @@ config name. This maps to the configuration file read from the server.</p>
   "AllowedHosts": "*"
  "spring": {
    "application": {
-     "name": "branch1"
+     "name": "core-cf-microservice-&lt;enter your name&gt;"
    },
    // determines the name of the files pulled; explicitly set to avoid
    // env variable overwriting it
