@@ -157,8 +157,9 @@ namespace bootcamp_webapi
 <li>
 <p>In <code>Startup.cs</code>, add configuration to the service container, allowing
 it to be injected into the <code>ProductsController</code>.</p>
-<pre><code class="language-diff">  // ...
-+ using Pivotal.Extensions.Configuration.ConfigServer;
+<pre><code>  
+// ...
+using Pivotal.Extensions.Configuration.ConfigServer;
 
   namespace bootcamp_webapi
   {
@@ -169,7 +170,7 @@ it to be injected into the <code>ProductsController</code>.</p>
           public void ConfigureServices(IServiceCollection services)
           {
               services.AddMvc();
-+             services.AddConfiguration(Configuration);
+             services.AddConfiguration(Configuration);
           }
 
           // ...
