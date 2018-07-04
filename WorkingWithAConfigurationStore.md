@@ -57,14 +57,15 @@ dotnet add package Pivotal.Extensions.Configuration.ConfigServerCore --version 2
 <li>
 <p>Enter the following code. It defines a new API controller, specifies
 the route that handles, it, and an operation we can invoke.</p>
-<pre><code class="language-csharp">using System;
+<pre><code class="language-csharp">
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace bootcamp_webapi.Controllers
 {
-    [Route(&quot;api/[controller]&quot;)]
+    [Route("api/[controller]")]
     public class ProductsController : Controller
     {
         private readonly IConfigurationRoot _config;
@@ -76,11 +77,11 @@ namespace bootcamp_webapi.Controllers
 
         // GET api/products
         [HttpGet]
-        public IEnumerable&lt;string&gt; Get()
+        public IEnumerable<string> Get()
         {
-            Console.WriteLine($&quot;connection string is {_config[&quot;productdbconnstring&quot;]}&quot;);
-            Console.WriteLine($&quot;Log level from config is {_config[&quot;loglevel&quot;]}&quot;);
-            return new[] {&quot;product1&quot;, &quot;product2&quot;};
+            Console.WriteLine($"connection string is {_config["productdbconnstring"]}");
+            Console.WriteLine($"Log level from config is {_config["loglevel"]}");
+            return new[] {"product1", "product2"};
         }
     }
 }
