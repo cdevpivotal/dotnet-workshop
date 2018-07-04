@@ -148,8 +148,7 @@ namespace bootcamp_webapi
                    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                    config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
                    config.AddConfigServer(env);
-               })
-                .Build();
+               });
     }
 }
 </code></pre>
