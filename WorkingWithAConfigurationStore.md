@@ -185,7 +185,7 @@ Cloud Foundry how to deploy your app. Enter:</p>
 <pre><code class="language-yaml">
 ---
 applications:
-- name: core-cf-microservice-<enter your name>
+- name: core-cf-microservice-&lt;enter your name&gt;
   buildpack: https://github.com/cloudfoundry/dotnet-core-buildpack#v2.0.5
   instances: 1
   memory: 256M
