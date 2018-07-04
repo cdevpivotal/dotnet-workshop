@@ -102,7 +102,6 @@ config name. This maps to the configuration file read from the server.</p>
       "Default": "Warning"
     }
   },
-  "AllowedHosts": "*"
  "spring": {
    "application": {
      "name": "core-cf-microservice-&lt;enter your name&gt;"
