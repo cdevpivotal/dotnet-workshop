@@ -1,0 +1,7 @@
+---
+applications:
+- name: <enter name here>
+instances: 1
+memory: 256M
+services:
+- <enter registry instance name here>
