@@ -1,4 +1,4 @@
- <h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction</h1>
 <p>In this exercise, we get hands-on with a Git-backed config store and build an app that
 consumes it.</p>
 <h1 id="point-config-server-to-git-repository">Point Config Server to Git repository</h1>
@@ -193,7 +193,8 @@ applications:
   env:
     ASPNETCORE_ENVIRONMENT: dev
   services:
-    - <your config server instance name></code></pre>
+    - &lt;your config server instance name&gt;
+    </code></pre>
 </li>
 <li>
 <p>Execute <code>cf push</code> to deploy this application to Cloud Foundry! Note
