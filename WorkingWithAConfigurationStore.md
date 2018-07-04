@@ -127,6 +127,7 @@ order:</p>
 <li>Our config store</li>
 </ol>
 <pre><code class="language-diff">// ...
+// ...
 + using Pivotal.Extensions.Configuration.ConfigServer;
 
 namespace bootcamp_webapi
@@ -135,16 +136,16 @@ namespace bootcamp_webapi
     {
         // ...
 
-        public static IWebHost BuildWebHost(string[] args) =&gt;
+        public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup&lt;Startup&gt;()
-+               .ConfigureAppConfiguration((hostContext, config) =&gt;
+                .UseStartup<Startup>()
++               .ConfigureAppConfiguration((hostContext, config) =>
 +               {
 +                   var env = hostContext.HostingEnvironment;
 +                   config.Sources.Clear();
 +                   config.AddEnvironmentVariables();
-+                   config.AddJsonFile(&quot;appsettings.json&quot;, optional: false, reloadOnChange: true);
-+                   config.AddJsonFile($&quot;appsettings.{env.EnvironmentName}.json&quot;, optional: true);
++                   config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
++                   config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 +                   config.AddConfigServer(env);
 +               })
                 .Build();
@@ -179,9 +180,10 @@ it to be injected into the <code>ProductsController</code>.</p>
 <li>
 <p>Add a <code>manifest.yml</code> file to the base of the project. This tells
 Cloud Foundry how to deploy your app. Enter:</p>
-<pre><code class="language-yaml">---
+<pre><code class="language-yaml">
+---
 applications:
-- name: core-cf-microservice-&lt;enter your name&gt;
+- name: core-cf-microservice-<enter your name>
   buildpack: https://github.com/cloudfoundry/dotnet-core-buildpack#v2.0.5
   instances: 1
   memory: 256M
@@ -189,13 +191,13 @@ applications:
   env:
     ASPNETCORE_ENVIRONMENT: dev
   services:
-    - &lt;your config server instance name&gt;
-</code></pre>
+    - <your config server instance name></code></pre>
 </li>
 <li>
 <p>Execute <code>cf push</code> to deploy this application to Cloud Foundry! Note
 the <strong>route</strong> of your microservice:</p>
-<pre><code class="language-no-highlight">Waiting for app to start...
+<pre><code class="language-no-highlight">
+Waiting for app to start...
 
 name:              core-cf-yourname
 requested state:   started
@@ -205,7 +207,7 @@ routes:            core-cf-yourname.apps.chicken.pal.pivotal.io
 last uploaded:     Wed 28 Mar 09:19:42 MDT 2018
 stack:             cflinuxfs2
 buildpack:         https://github.com/cloudfoundry/dotnet-core-buildpack#v2.0.5
-start command:     cd ${DEPS_DIR}/0/dotnet_publish &amp;&amp; ./mvctest --server.urls http://0.0.0.0:${PORT}
+start command:     cd ${DEPS_DIR}/0/dotnet_publish && ./mvctest --server.urls http://0.0.0.0:${PORT}
 </code></pre>
 </li>
 </ol>
@@ -217,13 +219,13 @@ start command:     cd ${DEPS_DIR}/0/dotnet_publish &amp;&amp; ./mvctest --server
 seeing a result.</p>
 </li>
 <li>
-<p>Go to the &quot;Logs&quot; view in Apps Manager and see the connection string
+<p>Go to the "Logs"; view in Apps Manager and see the connection string
 and log level written out.</p>
 </li>
 <li>
 <p>Go back to the source code and change the application name and cloud
-config name in the <code>appsettings.json</code> to &quot;branch3&quot;, and in the
-<code>manifest.yml</code> change the environment to &quot;qa.&quot; This should resolve to a
+config name in the <code>appsettings.json</code> to "branch3", and in the
+<code>manifest.yml</code> change the environment to "qa." This should resolve to a
 different configuration file in the GitHub repo, and load different
 values into the app's configuration properties.</p>
 </li>
