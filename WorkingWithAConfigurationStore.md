@@ -96,24 +96,25 @@ retrieve it's configuration from Cloud Foundry and the Config Server.</p>
 <p>Edit <code>appsettings.json</code> to include the application name and cloud
 config name. This maps to the configuration file read from the server.</p>
 <pre><code class="language-diff">{
-  &quot;Logging&quot;: {
-    &quot;IncludeScopes&quot;: false,
-    &quot;LogLevel&quot;: {
-      &quot;Default&quot;: &quot;Warning&quot;
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
     }
   },
-+ &quot;spring&quot;: {
-+   &quot;application&quot;: {
-+     &quot;name&quot;: &quot;branch1&quot;
-+   },
-+   // determines the name of the files pulled; explicitly set to avoid
-+   // env variable overwriting it
-+   &quot;cloud&quot;: {
-+     &quot;config&quot;: {
-+       &quot;name&quot;: &quot;branch1&quot;
-+     }
-+   }
-+ }
+  "AllowedHosts": "*"
+ "spring": {
+   "application": {
+     "name": "branch1"
+   },
+   // determines the name of the files pulled; explicitly set to avoid
+   // env variable overwriting it
+   "cloud": {
+     "config": {
+       "name": "branch1"
+     }
+   }
+ }
 }
 </code></pre>
 </li>
@@ -128,7 +129,7 @@ order:</p>
 </ol>
 <pre><code class="language-diff">// ...
 // ...
-+ using Pivotal.Extensions.Configuration.ConfigServer;
+using Pivotal.Extensions.Configuration.ConfigServer;
 
 namespace bootcamp_webapi
 {
@@ -139,15 +140,15 @@ namespace bootcamp_webapi
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-+               .ConfigureAppConfiguration((hostContext, config) =>
-+               {
-+                   var env = hostContext.HostingEnvironment;
-+                   config.Sources.Clear();
-+                   config.AddEnvironmentVariables();
-+                   config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-+                   config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-+                   config.AddConfigServer(env);
-+               })
+               .ConfigureAppConfiguration((hostContext, config) =>
+               {
+                   var env = hostContext.HostingEnvironment;
+                   config.Sources.Clear();
+                   config.AddEnvironmentVariables();
+                   config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                   config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                   config.AddConfigServer(env);
+               })
                 .Build();
     }
 }
