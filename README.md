@@ -16,4 +16,4 @@ By the end of the day, you’ll get exposed to what you need for refactoring exi
 * [Reading Material](ReadingMaterial.md)
 
 
-Completed exercises are in the BootcampLabs directory.
+Completed exercises are in the BootcampLabs directory and have been tested with dotnet 2.1.301 and dotnet-framework 2.1.0.
