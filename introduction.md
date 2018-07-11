@@ -17,7 +17,7 @@ of PCF, called Pivotal Web Services (PWS):</p>
 <p>Fill in details.</p>
 </li>
 <li>
-<p>Go to the email account you provided and click on verification email link.</p>
+<p>Go to the email account you provided and click on the verification email link.</p>
 </li>
 <li>
 <p>Click on &quot;claim free trial&quot; link and provide your phone number.</p>
