@@ -1,10 +1,10 @@
- <h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction</h1>
 <p>In this exercise, we'll set up our workstation and cloud environment so
 that we're ready to build and run modern .NET applications.</p>
-<p><strong>Your instructor will provide the url and credentials for the Pivotal
+<p><strong>You should have the url and credentials for the Pivotal
 Cloud Foundry (PCF) instance you will be using.</strong></p>
 <p>Alternatively, you can sign up for a trial account of the hosted version
-of PCF, called Pivotal Web Services:</p>
+of PCF, called Pivotal Web Services (PWS):</p>
 <ol>
 <li>
 <p>Go to <a href="http://run.pivotal.io" rel="noreferrer noopener">http://run.pivotal.io</a> and choose
@@ -17,10 +17,10 @@ of PCF, called Pivotal Web Services:</p>
 <p>Fill in details.</p>
 </li>
 <li>
-<p>Go to email account provided and click on verification email link.</p>
+<p>Go to the email account you provided and click on verification email link.</p>
 </li>
 <li>
-<p>Click on &quot;claim free trial&quot; link and provide phone number.</p>
+<p>Click on &quot;claim free trial&quot; link and provide your phone number.</p>
 </li>
 <li>
 <p>Validate your account and create your organization.</p>
@@ -113,7 +113,7 @@ Terminal gives you a shell interface without leaving Visual Studio Code.</p>
 </li>
 <li>
 <p>Navigate to a location where you'll store your project files
-(e.g. C:\BootcampLabs) and create a sub-directory called &quot;mvctest&quot; inside.</p>
+ (e.g. <code>C:\BootcampLabs</code>) and create a sub-directory called &quot;mvctest&quot; inside.</p>
 </li>
 <li>
 <p>Navigate into the newly created &quot;mvctest&quot; directory and type in
@@ -152,13 +152,15 @@ of your project.</p>
 <li>
 <p>Open the <code>manifest.yml</code> file, and type in the following (notice the
 typing assistance from the extension):</p>
-<pre><code class="language-yaml">---
+ 
+```yaml
+---
 applications:
 - name: core-cf-[enter your name]
   buildpack: https://github.com/cloudfoundry/dotnet-core-buildpack#v2.0.5
   instances: 1
   memory: 256M
-</code></pre>
+```
 </li>
 <li>
 <p>In the Terminal, type in <code>cf login -a &lt;PCF API url&gt;</code> and provide
