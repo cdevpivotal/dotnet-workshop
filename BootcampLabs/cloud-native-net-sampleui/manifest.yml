@@ -1,0 +1,7 @@
+---
+applications:
+- name: cloud-native-net-sampleui
+instances: 1
+memory: 256M
+services:
+- dotnetworkshopserviceregistry

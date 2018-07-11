@@ -1,0 +1,6 @@
+---
+applications:
+- name: core-cf-dotnetworkshop
+  instances: 1
+  memory: 256M
+

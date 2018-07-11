@@ -1,0 +1,11 @@
+---
+applications:
+- name: core-cf-microservice-dotnetworkshop
+  instances: 1
+  memory: 256M
+  # determines which environment to pull configs from
+  env:
+    ASPNETCORE_ENVIRONMENT: dev
+  services:
+    - dotnetworkshopconfigserver
+    - dotnetworkshopserviceregistry
