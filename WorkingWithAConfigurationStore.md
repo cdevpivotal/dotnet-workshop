@@ -1,32 +1,42 @@
 <h1 id="introduction">Introduction</h1>
-<p>In this exercise, we get hands-on with a Git-backed config store and build an app that
+<p>In this exercise, we work with a Git-backed config store and build an app that
 consumes it.</p>
+
 <h1 id="point-config-server-to-git-repository">Point Config Server to Git repository</h1>
+
 <ol>
 <li>
 <p>Create a file called <code>config.json</code> with the following contents. We
 will use this file to tell the Config Server where to get its
 configurations from.</p>
-<pre><code class="language-json">{
-  &quot;git&quot;: {
-    &quot;uri&quot;: &quot;"uri": &quot;https://github.com/cdevpivotal/sc-workshop&quot;, &quot;label&quot;: &quot;config&quot;
+  
+```json
+{
+  "git": {
+    "uri": "https://github.com/cdevpivotal/sc-workshop", "label": "config"
   }
 }
-</code></pre>
+```
+
 </li>
 <li>
-<p>From the Terminal within Visual Studio Code, enter in the following
+<p>From the Terminal within Visual Studio Code, enter the following
 command.</p>
-<pre><code class="language-bash">cf update-service &lt;your config server name&gt; -c config.json
-</code></pre>
+  
+```shell
+cf update-service <your config server name> -c config.json
+```
+  
 </li>
 <li>
 <p>From Apps Manager, navigate to the &quot;Services&quot; view, manage the Config
 Server instance, and notice the git URL in the configuration.</p>
 </li>
 </ol>
+
 <h1 id="create-aspnet-core-web-api">Create ASP.NET Core Web API</h1>
-<p>Here we create a brand new microservice and set it up with the Steeltoe
+
+<p>Let's create a brand new microservice and set it up with the Steeltoe
 libraries that pull configuration values from our Spring Cloud Services
 Config Server.</p>
 <ol>
@@ -42,10 +52,12 @@ web service.</p>
 </li>
 <li>
 <p>From the Terminal enter</p>
-<pre><code class="language-bash">dotnet add package Microsoft.Extensions.Options
+
+```shell
+dotnet add package Microsoft.Extensions.Options
 dotnet add package Microsoft.Extensions.Configuration
 dotnet add package Pivotal.Extensions.Configuration.ConfigServerCore --version 2.0.0
-</code></pre>
+```
 </li>
 <li>
 <p>Open the newly created folder in Visual Studio Code.</p>
@@ -56,8 +68,9 @@ dotnet add package Pivotal.Extensions.Configuration.ConfigServerCore --version 2
 </li>
 <li>
 <p>Enter the following code. It defines a new API controller, specifies
-the route that handles, it, and an operation we can invoke.</p>
-<pre><code class="language-csharp">
+the route that handles it and an operation we can invoke.</p>
+
+```C#
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -85,17 +98,22 @@ namespace bootcamp_webapi.Controllers
         }
     }
 }
-</code></pre>
+```
+
 </li>
 </ol>
+
 <h1 id="connect-application-to-config-server">Connect application to Config Server</h1>
+
 <p>Next, we add what's needed to make our ASP.NET Core application
-retrieve it's configuration from Cloud Foundry and the Config Server.</p>
+retrieve its configuration from Cloud Foundry and the Config Server.</p>
 <ol>
 <li>
 <p>Edit <code>appsettings.json</code> to include the application name and cloud
-config name. This maps to the configuration file read from the server.</p>
-<pre><code class="language-diff">{
+config name. The cloud config name maps to a configuration file read from the server, here this is branch 1. 
+By explicity setting the config to this file (branch1), we ensure environment variables won't overwrite configuration.</p>
+
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -104,10 +122,8 @@ config name. This maps to the configuration file read from the server.</p>
   },
  "spring": {
    "application": {
-     "name": "core-cf-microservice-&lt;enter your name&gt;"
+     "name": "core-cf-microservice-<enter your name>"
    },
-   // determines the name of the files pulled; explicitly set to avoid
-   // env variable overwriting it
    "cloud": {
      "config": {
        "name": "branch1"
@@ -115,7 +131,8 @@ config name. This maps to the configuration file read from the server.</p>
    }
  }
 }
-</code></pre>
+```
+
 </li>
 <li>
 <p>In <code>Program.cs</code>, set up configuration providers in the following
@@ -126,7 +143,8 @@ order:</p>
 <li>Environment-specific <code>appsettings.json</code></li>
 <li>Our config store</li>
 </ol>
-<pre><code class="language-diff">// ...
+  
+```C#
 // ...
 using Pivotal.Extensions.Configuration.ConfigServer;
 
@@ -150,12 +168,14 @@ namespace bootcamp_webapi
                });
     }
 }
-</code></pre>
+```
+
 </li>
 <li>
 <p>In <code>Startup.cs</code>, add configuration to the service container, allowing
 it to be injected into the <code>ProductsController</code>.</p>
-<pre><code>  
+
+```C#
 // ...
 using Pivotal.Extensions.Configuration.ConfigServer;
 
@@ -167,36 +187,39 @@ using Pivotal.Extensions.Configuration.ConfigServer;
 
           public void ConfigureServices(IServiceCollection services)
           {
-              services.AddMvc();
+             services.AddMvc();
              services.AddConfiguration(Configuration);
           }
 
           // ...
       }
   }
+```
 
-</code></pre>
 </li>
 <li>
-<p>Add a <code>manifest.yml</code> file to the base of the project. This tells
+<p>Add a <code>manifest.yml</code> file to the base directory of the project. This tells
 Cloud Foundry how to deploy your app. Enter:</p>
-<pre><code class="language-yaml">
+
+```yaml
 ---
 applications:
-- name: core-cf-microservice-&lt;enter your name&gt;
+- name: core-cf-microservice-<enter your name>
   instances: 1
   memory: 256M
   # determines which environment to pull configs from
   env:
     ASPNETCORE_ENVIRONMENT: dev
   services:
-    - &lt;your config server instance name&gt;
-    </code></pre>
+    - <your config server instance name>
+```
+
 </li>
 <li>
 <p>Execute <code>cf push</code> to deploy this application to Cloud Foundry! Note
 the <strong>route</strong> of your microservice:</p>
-<pre><code class="language-no-highlight">
+
+```
 Waiting for app to start...
 
 name:              core-cf-yourname
@@ -208,15 +231,18 @@ last uploaded:     Wed 28 Mar 09:19:42 MDT 2018
 stack:             cflinuxfs2
 buildpack:         https://github.com/cloudfoundry/dotnet-core-buildpack#v2.0.5
 start command:     cd ${DEPS_DIR}/0/dotnet_publish && ./mvctest --server.urls http://0.0.0.0:${PORT}
-</code></pre>
+```
+
 </li>
 </ol>
+
 <h1 id="observe-behavior-when-changing-application-name-or-label">Observe behavior when changing application name or label</h1>
+
 <p>See how configurations are pulled and used.</p>
 <ol>
 <li>
 <p>Navigate to the <code>/api/products</code> endpoint of your microservice and
-seeing a result.</p>
+observe the result.</p>
 </li>
 <li>
 <p>Go to the "Logs"; view in Apps Manager and see the connection string
@@ -224,7 +250,7 @@ and log level written out.</p>
 </li>
 <li>
 <p>Go back to the source code and change the application name and cloud
-config name in the <code>appsettings.json</code> to "branch3", and in the
+config name in <code>appsettings.json</code> to "branch3", and in 
 <code>manifest.yml</code> change the environment to "qa." This should resolve to a
 different configuration file in the GitHub repo, and load different
 values into the app's configuration properties.</p>
