@@ -114,7 +114,6 @@ typing assistance from the extension):</p>
 ---
 applications:
 - name: core-cf-[enter your name]
-  buildpack: https://github.com/cloudfoundry/dotnet-core-buildpack#v2.0.5
   instances: 1
   memory: 256M
 ```
