@@ -11,7 +11,7 @@ of PCF, called Pivotal Web Services (PWS):</p>
 &quot;sign up for free.&quot;</p>
 </li>
 <li>
-<p>Click &quot;create account&quot; link on sign up page.</p>
+<p>Click the &quot;create account&quot; link on sign up page.</p>
 </li>
 <li>
 <p>Fill in details.</p>
