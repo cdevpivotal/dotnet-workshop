@@ -32,7 +32,7 @@ of PCF, called Pivotal Web Services (PWS):</p>
 command line interface (CLI). To install the CLI follow the instructions at https://docs.pivotal.io/pivotalcf/cf-cli/install-go-cli.html.</p>
 
 <p>Confirm that the CLI installed correctly by opening a command line terminal and
-type: <code>dotnet --version</code></p>
+type: <code>cf -v</code></p>
 </li>
 
 <h1 id="install-net-core-and-visual-studio-code">Install .NET Core and Visual Studio Code</h1>
@@ -45,7 +45,7 @@ to download and install the latest version of the .NET Core SDK.</p>
 </li>
 <li>
 <p>Confirm that it installed correctly by opening a command line and
-typing <code>dotnet --version</code></p>
+type: <code>dotnet --version</code></p>
 </li>
 <li>
 <p>Install <a href="https://code.visualstudio.com" rel="noreferrer noopener">Visual Studio Code</a> using
@@ -103,8 +103,8 @@ application, enter <code>Ctrl+C</code>.</p>
 support for Cloud Foundry manifest files.</p>
 </li>
 <li>
-<p>In Visual Studio Code, create a new file called manifest.yml at base
-of your project.</p>
+<p>In Visual Studio Code, create a new file called manifest.yml in the base
+directory of your project (e.g. mvctest).</p>
 </li>
 <li>
 <p>Open the <code>manifest.yml</code> file, and type in the following (notice the
@@ -125,21 +125,21 @@ your credentials. Now you are connected to Pivotal Cloud Foundry.</p>
 </li>
 <li>
 <p>Enter <code>cf push</code> into the Terminal, and watch your application get
-bundled up and deploy to Cloud Foundry.</p>
+bundled up and deployed to Cloud Foundry.</p>
 </li>
 <li>
-<p>In Pivotal Cloud Foundry Apps Manager, see your app show up, andvisit the app’s URL.</p>
+<p>In Pivotal Cloud Foundry Apps Manager, see your app show up, and visit the app’s URL.</p>
 </li>
 </ol>
 
 <h1 id="instantiate-spring-cloud-services-instances">Instantiate Spring Cloud Services instances</h1>
 
 <p>Spring Cloud Services wrap up key Spring Cloud projects with managed capabilities.
-Here we create a pair of these managed services.</p>
+Here we create a couple of these managed services.</p>
 <ol>
 <li>
-<p>In Pivotal Cloud Foundry Apps Manager, click on your &quot;space&quot; on the
-left, and switch to the &quot;Services&quot; tab. Note that all of these
+<p>In Pivotal Cloud Foundry Apps Manager, select your &quot;space&quot; on the
+left nav bar, and switch to the &quot;Services&quot; tab. Note that all of these
 activities can also be done via the CF CLI.</p>
 </li>
 <li>
@@ -153,7 +153,7 @@ activities can also be done via the CF CLI.</p>
 </li>
 <li>
 <p>Provide an instance name and do not choose to bind the service to
-any existing applications. Click &quot;Create.&quot; This service will take a
+any existing applications. Select &quot;Create.&quot; This service will take a
 couple of minutes to become available.</p>
 </li>
 <li>
@@ -170,7 +170,7 @@ choose Service Registry, and click the &quot;manage&quot; link. This takes you t
 the Eureka dashboard.</p>
 </li>
 <li>
-<p>Return again to the default space, click &quot;Service&quot;, choose Config
+<p>Return again to the default space, click &quot;Services&quot;, choose Config
 Server, and click the &quot;manage&quot; link. Nothing here just yet!</p>
 </li>
 </ol>
