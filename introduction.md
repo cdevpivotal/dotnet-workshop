@@ -113,7 +113,7 @@ typing assistance from the extension):</p>
 ```yaml
 ---
 applications:
-- name: core-cf-[enter your name]
+- name: core-cf-<enter your name>
   instances: 1
   memory: 256M
 ```
