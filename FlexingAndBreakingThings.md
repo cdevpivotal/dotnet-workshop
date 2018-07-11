@@ -1,13 +1,13 @@
- <h1 id="introduction">Introduction</h1>
-<p>It’s fun to try out the platform itself and see how it works in certain
-situations. Here we trigger autoscaling, and observe failure recovery.</p>
+<h1 id="introduction">Introduction</h1>
+<p>In tnis exercise we trigger autoscaling and then observe failure recovery.</p>
+
 <h1 id="configure-and-test-out-autoscaling-policies">Configure and test out autoscaling policies</h1>
+
 <p>Autoscaling is a key part of any solid platform. Here we create a
 policy, and trigger it!</p>
 <ol>
 <li>
-<p>Download the .NET Core project located at
-<a href="https://github.com/cdevpivotal/dotnet-workshop/tree/master/cloud-native-net-loadtest" rel="noreferrer noopener">https://github.com/cdevpivotal/dotnet-workshop/tree/master/cloud-native-net-loadtest</a>.</p>
+<p>Go to the .NET Core cloud-native-net-loadtest project directory.
 </li>
 <li>
 <p>Open the project in Visual Studio Code.</p>
@@ -21,8 +21,7 @@ URL.</p>
 service.</p>
 </li>
 <li>
-<p>Bind the autoscaler service to your microservice by viewing the
-autoscaler service, add choosing to add a bound app.</p>
+<p>Bind the autoscaler service to your microservice: select bind app.</p>
 </li>
 <li>
 <p>Click the &quot;manage&quot; link on the autoscaler page to set up a scaling
@@ -42,23 +41,23 @@ than 4 requests per second.</p>
 definition. Save the policy.</p>
 </li>
 <li>
-<p>Start the &quot;load test&quot; .NET Core project on your machine that
-repeatedly calls your microservice. Start it by entering <code>dotnet run</code>
-in the Terminal while pointing at that application folder.</p>
+<p>At the command prompt, from the loadtest application directory, start the app: <code>dotnet run</code>.</p>
 </li>
 <li>
 <p>On the overview page of your microservice in Apps Manager, observe a
 second instance come online shortly. This is in response to the elevated
-load, and your autoscaling policy kicking in. Also notice a new &quot;event&quot;
+load, and the autoscaling policy kicking in. Also notice a new &quot;event&quot;
 added to the list.</p>
 </li>
 <li>
 <p>Stop the load testing app (Ctrl+C), and watch the application scale
-back down to a single instance within 30 seconds.</p>
+back down to a single instance within a few seconds.</p>
 </li>
 </ol>
+
 <h1 id="update-microservice-with-new-fault-endpoint-and-logs">Update microservice with new &quot;fault&quot; endpoint and logs</h1>
-<p>Let’s add a new microservice endpoint that purposes crashes our app.
+
+<p>Let’s add a new microservice endpoint that purposesly crashes our app.
 We can see how the platform behaves when an instance disappears.</p>
 <ol>
 <li>
@@ -66,13 +65,15 @@ We can see how the platform behaves when an instance disappears.</p>
 </li>
 <li>
 <p>Create a new controller named <code>FailureController.cs</code> with the
-following content:</p>
-<pre><code class="language-csharp">using Microsoft.AspNetCore.Mvc;
+following code:</p>
+ 
+```C#
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace bootcamp_webapi.Controllers
 {
-    [Route(&quot;api/[controller]&quot;)]
+    [Route("api/[controller]")]
     public class FailureController : Controller
     {
         public FailureController(IConfigurationRoot config)
@@ -86,14 +87,15 @@ namespace bootcamp_webapi.Controllers
         [HttpGet]
         public ActionResult TriggerFailure(string action)
         {
-            System.Console.WriteLine(&quot;bombing out ...&quot;);
+            System.Console.WriteLine("bombing out ...");
             //purposely crash
             System.Environment.Exit(100);
             return null;
         }
     }
 }
-</code></pre>
+```
+
 </li>
 <li>
 <p>Deploy the updated service to Cloud Foundry.</p>
