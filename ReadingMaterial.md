@@ -21,6 +21,10 @@ An excellent cross-platform .NET IDE from the makers of IntelliJ.</p>
 <li>
 <p><strong><a href="https://seroter.wordpress.com/2017/09/21/adding-circuit-breakers-to-your-net-applications/" rel="noreferrer noopener">Blog: Adding Circuit-Breakers to Your .NET Applications</a></strong></p>
 </li>
+<li>
+<p><strong><a href="https://marketplace.visualstudio.com/items?itemName=ms-vsts.cloud-foundry-build-extension" rel="noreferrer noopener">VSTS Cloud Foundry build extension</a></strong> —
+The plugin makes it simple to configure and automate deployments to Cloud Foundry.</p>
+</li>
 </ul>
 <h2 id="architecture">Architecture</h2>
 <ul>
